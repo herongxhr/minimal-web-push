@@ -1,8 +1,22 @@
+// 文件 index.pug 是一个使用 Pug 模板引擎编写的 HTML 文件。Pug（之前称为 Jade）是一个流行的模板引擎，允许更简洁和条件化的方式来编写 HTML。下面是对 index.pug 文件内容的逐行解释和注释：
+// 这行代码定义了一个内联脚本。Pug 使用点符号 '.' 表示内联脚本或样式。
+// 这个 Pug 模板的主要作用是：
+// 通过内联脚本设置 VAPID 公钥。
+// 引入客户端 JavaScript 文件（client.js），它包含用于处理推送通知订阅的逻辑。
+// 显示一个标题和一个可点击的链接，该链接用于触发通知权限的请求。当用户点击这个链接时，将调用 onPromptClick() 函数，这通常会显示一个浏览器对话框，询问用户是否允许网站显示通知。
 script.
+  // 这里声明了一个 JavaScript 变量 'VAPID_PUBLIC_KEY'，并将其值设置为模板变量 'vapidPublicKey' 的值。
+  // 模板变量 'vapidPublicKey' 需要在服务器端渲染时提供。
   const VAPID_PUBLIC_KEY = '#{vapidPublicKey}';
 
+// 引入一个外部 JavaScript 文件 '/client.js'。
 script(src="/client.js")
 
+// 创建一个 HTML 标题元素 <h1>，显示文本 "Minimal Web Push Example"。
 h1 Minimal Web Push Example
 
+// 创建一个 HTML 链接元素 <a>，用于启用通知。
+// 'href="#"' 表示这个链接不会导向任何特定的页面。
+// 'id="promptLink"' 设置了元素的 ID，可以在 JavaScript 中用来引用这个元素。
+// 'onclick="onPromptClick()"' 是一个事件处理器，当用户点击这个链接时，会执行 'onPromptClick()' 函数。
 a(href="#" id="promptLink" onclick="onPromptClick()") Enable notifications
